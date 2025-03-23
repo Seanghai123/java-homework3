@@ -1,0 +1,33 @@
+CREATE TABLE product_tb (
+    product_id SERIAL PRIMARY KEY,
+    product_name VARCHAR(100) NOT NULL,
+    category VARCHAR(50) NOT NULL CHECK (category IN ('Drink', 'Sports', 'Books', 'Clothing')),
+    price NUMERIC(6,2) CHECK (price > 0),
+    stock_quantity INT CHECK (stock_quantity > 0)
+);
+INSERT INTO product_tb (product_name, category, price, stock_quantity) VALUES
+('Coca', 'Drink', 120.00, 200),
+('Pepsi', 'Drink', 100.00, 150),
+('Basketball', 'Sports', 10.00, 50),
+('T-Shirt', 'Clothing', 15.00, 300),
+('The Great Gatsby', 'Books', 7.50, 120);
+
+SELECT * FROM product_tb;
+
+SELECT * FROM product_tb
+WHERE category IN ('Sports', 'Clothing');
+
+SELECT * FROM product_tb
+WHERE stock_quantity > 200;
+
+UPDATE product_tb
+SET price = 1.80, stock_quantity = 300
+WHERE product_name = 'Pepsi';
+
+UPDATE product_tb
+SET stock_quantity = stock_quantity + 15
+WHERE product_id = 4;
+
+DELETE FROM product_tb
+WHERE price <= 2.00;
+
